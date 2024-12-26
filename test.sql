@@ -6,7 +6,7 @@ CREATE TABLE users
 );
 
 
--- Sedighi Homeless
+-- Mahdi Sedighi
 DELETE
 FROM user_homes
 WHERE user_name = 'Sedighi';
