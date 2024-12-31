@@ -8,7 +8,7 @@ CREATE TABLE users
 
 -- Mahdi Sedighi
 
-CREATE TABLE personal-dept(
+CREATE TABLE personal_dept(
 	serial-dept INT PRIMARY KEY NOT NULL,
 	type-dept VARCHAR(50) NOT NULL,
 
@@ -32,7 +32,7 @@ CREATE TABLE transaction(
 	FOREIGN KEY (bill) REFERENCES # (#)
 );
 
-CREATE TABLE bank-account(
+CREATE TABLE bank_account(
 	account-id SERIAL PRIMARY KEY UNIQUE  NOT NULL,
 	account-type VARCHAR(40) NOT NULL,
 	emp INT NOT NULL ,
