@@ -14,7 +14,7 @@ CREATE TABLE personal_dept(
 
 
 
-	FOREIGN KEY (serial-dept) REFERENCES # (#)
+	FOREIGN KEY (serial-dept) REFERENCES # (#) ON DELETE CASCADE
 );
 
 CREATE TABLE rule(
@@ -29,7 +29,7 @@ CREATE TABLE transaction(
 	bill INT NOT NULL,
 
 
-	FOREIGN KEY (bill) REFERENCES # (#)
+	FOREIGN KEY (bill) REFERENCES # (#) ON DELETE CASCADE
 );
 
 CREATE TABLE bank_account(
@@ -38,8 +38,8 @@ CREATE TABLE bank_account(
 	emp INT NOT NULL ,
 	traking-code INT NOT NULL,
 
-	FOREIGN KEY (emp) REFERENCES # (#),
-	FOREIGN KEY (traking-code) REFERENCES transaction (tracking-code),
+	FOREIGN KEY (emp) REFERENCES # (#) ON DELETE CASCADE,
+	FOREIGN KEY (traking-code) REFERENCES transaction (tracking-code) ON DELETE CASCADE,
 );
 
 CREATE TABLE benefits(
@@ -49,7 +49,7 @@ CREATE TABLE benefits(
 	mission-allowance(50) NOT NULL,
 
 	salary INT NOT NULL,
-	FOREIGN KEY (salary) REFERENCES # (#),
+	FOREIGN KEY (salary) REFERENCES # (#) ON DELETE CASCADE,
 );
 
 CREATE TABLE experience(
@@ -60,7 +60,7 @@ CREATE TABLE experience(
 	position VARCHAR(50) NOT NULL,
 
 	emp INT NOT NULL,
-	FOREIGN KEY (emp) REFERENCES # (#),
+	FOREIGN KEY (emp) REFERENCES # (#) ON DELETE CASCADE,
 );
 
 CREATE TABLE employment_contracts (
@@ -72,7 +72,7 @@ CREATE TABLE employment_contracts (
 
 
 	emp INT NOT NULL   ,
-	FOREIGN KEY (emp) REFERENCES # (#),
+	FOREIGN KEY (emp) REFERENCES # (#) ON DELETE CASCADE,
 
 );
 
@@ -82,7 +82,7 @@ CREATE TABLE project_contracts (
 
 
 
-    FOREIGN KEY (contract_id) REFERENCES employment_contracts(contract_id)
+    FOREIGN KEY (contract_id) REFERENCES employment_contracts(contract_id) ON DELETE CASCADE
 );
 
 CREATE TABLE scale_contracts (
@@ -90,7 +90,7 @@ CREATE TABLE scale_contracts (
     project_type VARCHAR(50) NOT NULL,
 
 
-	FOREIGN KEY (contract_id) REFERENCES employment_contracts(contract_id)
+	FOREIGN KEY (contract_id) REFERENCES employment_contracts(contract_id) ON DELETE CASCADE
 );
 
 -- Saeed safaee
