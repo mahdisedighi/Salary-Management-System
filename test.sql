@@ -33,7 +33,7 @@ CREATE TABLE transaction(
 );
 
 CREATE TABLE bank_account(
-	account-id SERIAL PRIMARY KEY UNIQUE  NOT NULL,
+	account-number SERIAL PRIMARY KEY UNIQUE  NOT NULL,
 	account-type VARCHAR(40) NOT NULL,
 	emp INT NOT NULL ,
 	traking-code INT NOT NULL,
