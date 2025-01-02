@@ -23,7 +23,7 @@ create table project.Employee_Family (
     Date_of_Birth DATE,
     Relation char(50),
     PRIMARY KEY (Personnel_ID, Name),
-    FOREIGN KEY (Personnel_ID) REFERENCES project.Employee(Personnel_ID)
+    FOREIGN KEY (Personnel_ID) REFERENCES project.Employee(Personnel_ID) ON DELETE CASCADE
 );
 -- جدول مهارت
 create table project.Skill (
@@ -36,8 +36,8 @@ create table project.Employee_Skill (
     Skill_ID INT not null,
     Personnel_ID INT not null,
     PRIMARY KEY (Skill_ID, Personnel_ID),
-    FOREIGN KEY (Skill_ID) REFERENCES project.Skill(Skill_ID),
-    FOREIGN KEY (Personnel_ID) REFERENCES project.Employee(Personnel_ID)
+    FOREIGN KEY (Skill_ID) REFERENCES project.Skill(Skill_ID) ON DELETE CASCADE,
+    FOREIGN KEY (Personnel_ID) REFERENCES project.Employee(Personnel_ID) ON DELETE CASCADE
 );
 -- جدول مدرک تحصیلی
 create table project.Education (
@@ -47,7 +47,7 @@ create table project.Education (
     Graduation_Date DATE,
     Institution_id int not null,
 	Personnel_ID INT not null,
-	FOREIGN KEY (Personnel_ID) REFERENCES project.Employee(Personnel_ID)
+	FOREIGN KEY (Personnel_ID) REFERENCES project.Employee(Personnel_ID) ON DELETE CASCADE
 
 );
 -- جدول موسسه
@@ -110,7 +110,7 @@ CREATE TABLE project.Work_Hours (
     End_Time TIME NOT NULL,
 	Absence char(50) ,
 	leavee int check(leavee <40 and leavee >0),
-    FOREIGN KEY (Personnel_ID) REFERENCES project.Employee(Personnel_ID),
+    FOREIGN KEY (Personnel_ID) REFERENCES project.Employee(Personnel_ID) ON DELETE CASCADE,
 	FOREIGN KEY (Manager_ID) REFERENCES project.Manager(Manager_ID)
 
 );
@@ -131,7 +131,7 @@ create table project.Salary (
     Salary_ID INT PRIMARY KEY,
     Employee_ID INT,
     Payment_Period char(50),
-    FOREIGN KEY (Employee_ID) REFERENCES project.Employee(Personnel_ID)
+    FOREIGN KEY (Employee_ID) REFERENCES project.Employee(Personnel_ID) ON DELETE CASCADE
 );
 -- جدول کسورات
 create table project.Deductions (
@@ -140,7 +140,7 @@ create table project.Deductions (
     Employee_ID INT not null,
 	Law_ID INT not null,
 	Salary_bill INT not null,
-    FOREIGN KEY (Employee_ID) REFERENCES project.Employee(Personnel_ID),
+    FOREIGN KEY (Employee_ID) REFERENCES project.Employee(Personnel_ID) ON DELETE CASCADE,
     FOREIGN KEY (Salary_bill) REFERENCES project.Salary(Salary_ID),
     FOREIGN KEY (Law_ID) REFERENCES project.Law(Law_ID)
 );
@@ -183,19 +183,19 @@ create table project.Work_Contract (
     End_Date DATE not null,
     responsible char(100),
     Base_Salary int check(Base_Salary >15000000 and Base_Salary <50000000) not null,
-    FOREIGN KEY (Employee_ID) REFERENCES project.Employee(Personnel_ID)
+    FOREIGN KEY (Employee_ID) REFERENCES project.Employee(Personnel_ID) ON DELETE CASCADE
 );
 -- جدول قراردادی
 create table project.Contract (
     Contract_ID INT PRIMARY KEY,
     Contract_Type char(100),
-	    FOREIGN KEY (Contract_ID) REFERENCES project.Work_Contract(Contract_ID)
+	    FOREIGN KEY (Contract_ID) REFERENCES project.Work_Contract(Contract_ID) ON DELETE CASCADE
 
 );
 -- جدول پیمانه ای
 create table project.Continuous (
     Continuous_ID INT PRIMARY KEY,
     Continuous_Type char(100),
-	FOREIGN KEY (Continuous_ID) REFERENCES project.Work_Contract(Contract_ID)
+	FOREIGN KEY (Continuous_ID) REFERENCES project.Work_Contract(Contract_ID) ON DELETE CASCADE
 
 );
