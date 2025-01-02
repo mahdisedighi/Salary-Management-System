@@ -5,24 +5,31 @@ create table project.Employee (
     Full_Name char(100) not null,
     Hire_Date DATE not null,
     Contact_Number char(15) not null,
-	Gender char(50) not null,
-    NationalCode char(255) not null
+    Address char(255) not null,
+	Gender char(50) not null
+);
+-- جدول شماره تماس کارمند
+create table project.Employee_Contact (
+    Personnel_ID INT,
+    Contact_Number char(15),
+    PRIMARY KEY (Personnel_ID, Contact_Number),
+    FOREIGN KEY (Personnel_ID) REFERENCES project.Employee(Personnel_ID) ON DELETE CASCADE
 );
 -- جدول اعضای خانواده کارمند
 create table project.Employee_Family (
-    Personnel_ID INT not null,
-    NationalCode char(255) not null,
-    Name char(50) not null,
-    Age INT not null,
-    Relation char(50) not null,
-    PRIMARY KEY (Personnel_ID, NationalCode),
+    Personnel_ID INT,
+    Name char(50),
+    Last_Name char(50),
+    Date_of_Birth DATE,
+    Relation char(50),
+    PRIMARY KEY (Personnel_ID, Name),
     FOREIGN KEY (Personnel_ID) REFERENCES project.Employee(Personnel_ID)
 );
 -- جدول مهارت
 create table project.Skill (
     Skill_ID INT PRIMARY KEY,
     Title char(50) not null,
-    Skill_Type char(50) not null
+    Skill_Type char(50)
 );
 -- جدول ارتباط مهارت-کارمند
 create table project.Employee_Skill (
@@ -35,13 +42,13 @@ create table project.Employee_Skill (
 -- جدول مدرک تحصیلی
 create table project.Education (
     Education_ID INT PRIMARY KEY,
-    Title char(100) not null,
-    Year INT not null,
+    Degree char(100) not null,
     Major char(100) not null,
-	Personnel_ID INT not null,
+    Graduation_Date DATE,
     Institution_id int not null,
-	FOREIGN KEY (Personnel_ID) REFERENCES project.Employee(Personnel_ID),
-	FOREIGN KEY (Institution_id) REFERENCES project.Institution(Institution_ID)
+	Personnel_ID INT not null,
+	FOREIGN KEY (Personnel_ID) REFERENCES project.Employee(Personnel_ID)
+
 );
 -- جدول موسسه
 create table project.Institution (
@@ -49,7 +56,7 @@ create table project.Institution (
     Name char(100) not null,
     Contact_Number char(15),
     Address char(255),
-    PRIMARY KEY (Institution_ID)
+    PRIMARY KEY (Institution_ID, Name)
 );
 -- جدول تجربه کاری
 create table project.Work_Experience (
@@ -110,9 +117,9 @@ CREATE TABLE project.Work_Hours (
 -- جدول مدیر
 CREATE TABLE project.Manager (
     Manager_ID INT PRIMARY KEY,
-    NationalCode char(255) not null,
-    ManagementField CHAR(100),
-    Name CHAR(100) NOT NULL,
+    Personnel_ID char(50) not null,
+    managment_feild CHAR(100),
+    Full_Name CHAR(100) NOT NULL,
     Contact_Number CHAR(15) NOT NULL
 );
 
@@ -148,12 +155,12 @@ create table project.Tax (
 );
 -- جدول بیمه
 CREATE TABLE project.Insurance (
-    Insurance_ID INT PRIMARY KEY,
-    Insurance_Type CHAR(100) NOT NULL default 'village_Insurance',
-    Start_Date DATE NOT NULL,
-    End_Date DATE,
-    Insurance_Company CHAR(100),
-    FOREIGN KEY (Insurance_ID) REFERENCES project.Deductions(Deduction_ID)
+Insurance_ID INT PRIMARY KEY, 
+Insurance_Type CHAR(100) NOT NULL default 'village_Insurance',
+Start_Date DATE NOT NULL,
+End_Date DATE, 
+Insurance_Company CHAR(100),
+FOREIGN KEY (Insurance_ID) REFERENCES project.Deductions(Deduction_ID)
 
 );
 -- جدول بدهی شخصی
@@ -182,7 +189,7 @@ create table project.Work_Contract (
 create table project.Contract (
     Contract_ID INT PRIMARY KEY,
     Contract_Type char(100),
-    FOREIGN KEY (Contract_ID) REFERENCES project.Work_Contract(Contract_ID)
+	    FOREIGN KEY (Contract_ID) REFERENCES project.Work_Contract(Contract_ID)
 
 );
 -- جدول پیمانه ای
