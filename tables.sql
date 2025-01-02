@@ -56,7 +56,9 @@ create table project.Institution (
     Name char(100) not null,
     Contact_Number char(15),
     Address char(255),
-    PRIMARY KEY (Institution_ID, Name)
+    Education_ID INT not null,
+    PRIMARY KEY (Institution_ID, Name),
+    FOREIGN KEY (Education_ID) REFERENCES project.Education(Education_ID)
 );
 -- جدول تجربه کاری
 create table project.Work_Experience (
